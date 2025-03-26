@@ -1,0 +1,51 @@
+{
+    "name": "buyme/madeline-proto-integration",
+    "description": "Laravel package for the MadelineProto microservice in BuymeUa",
+    "type": "library",
+    "keywords": [
+        "laravel",
+        "package",
+        "madeline-proto"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Developer",
+            "email": "info@buymeua.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Buyme\\MadelineProtoIntegration\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Byume\\MadelineProtoIntegration\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^12.3"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.73",
+        "mockery/mockery": "^1.6",
+        "phpunit/phpunit": "^12.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Byume\\MadelineProtoIntegration\\Providers\\MadelineProtoIntegrationServiceProvider.php"
+            ],
+            "aliases": {
+                "PackageName": "Byume\\MadelineProtoIntegration\\Facades\\MadelineProtoIntegration.php"
+            }
+        }
+    }
+}
