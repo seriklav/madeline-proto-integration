@@ -15,7 +15,7 @@ composer buyme/madeline-proto-integration
 - You can publish the config file using the following command:
 
 ```bash
-php artisan vendor:publish --provider="Byume\MadelineProtoIntegration\Providers\MadelineProtoIntegrationServiceProvider"
+php artisan vendor:publish --provider="Buyme\MadelineProtoIntegration\Providers\MadelineProtoIntegrationServiceProvider"
 ```
 
 This will create the package's config file called `madeline-proto-integration.php` in the `config` directory. These are the contents of the published config file:

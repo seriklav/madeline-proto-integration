@@ -21,7 +21,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Byume\\MadelineProtoIntegration\\Tests\\": "tests/"
+            "Buyme\\MadelineProtoIntegration\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "dev",
@@ -31,20 +31,23 @@
     },
     "require": {
         "php": "^8.2",
-        "illuminate/support": "^12.3"
+        "guzzlehttp/guzzle": "^7.9",
+        "illuminate/session": "*",
+        "illuminate/support": "9.*"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.73",
         "mockery/mockery": "^1.6",
-        "phpunit/phpunit": "^12.0"
+        "orchestra/testbench": "^7.53",
+        "phpunit/phpunit": "^9.6"
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Byume\\MadelineProtoIntegration\\Providers\\MadelineProtoIntegrationServiceProvider.php"
+                "Buyme\\MadelineProtoIntegration\\Providers\\MadelineProtoIntegrationServiceProvider.php"
             ],
             "aliases": {
-                "PackageName": "Byume\\MadelineProtoIntegration\\Facades\\MadelineProtoIntegration.php"
+                "PackageName": "Buyme\\MadelineProtoIntegration\\Facades\\MadelineProtoIntegration.php"
             }
         }
     }
