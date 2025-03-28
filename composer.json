@@ -32,7 +32,7 @@
     "require": {
         "php": "^8.2",
         "guzzlehttp/guzzle": "^7.9",
-        "illuminate/session": "*",
+        "illuminate/cache": "9.*",
         "illuminate/support": "9.*"
     },
     "require-dev": {
@@ -44,10 +44,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Buyme\\MadelineProtoIntegration\\Providers\\MadelineProtoIntegrationServiceProvider.php"
+                "Buyme\\MadelineProtoIntegration\\Providers\\MadelineProtoIntegrationServiceProvider"
             ],
             "aliases": {
-                "PackageName": "Buyme\\MadelineProtoIntegration\\Facades\\MadelineProtoIntegration.php"
+                "MadelineProtoIntegration": "Buyme\\MadelineProtoIntegration\\Facades\\MadelineProtoIntegration"
             }
         }
     }
