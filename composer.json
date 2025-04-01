@@ -47,7 +47,8 @@
                 "Buyme\\MadelineProtoIntegration\\Providers\\MadelineProtoIntegrationServiceProvider"
             ],
             "aliases": {
-                "MPIAuth": "Buyme\\MadelineProtoIntegration\\Facades\\MPIAuth"
+                "MPIAuth": "Buyme\\MadelineProtoIntegration\\Facades\\MPIAuth",
+                "MPIUser": "Buyme\\MadelineProtoIntegration\\Facades\\MPIUser"
             }
         }
     }

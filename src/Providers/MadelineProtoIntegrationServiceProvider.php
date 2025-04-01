@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Buyme\MadelineProtoIntegration\Providers;
 
-use Buyme\MadelineProtoIntegration\Services\V1\Telegram\Auth\User\TelegramAuthUserService;
-use Illuminate\Support\ServiceProvider;
+use Buyme\MadelineProtoIntegration\Services\V1\Telegram\Auth\TelegramAuthService;
+use Buyme\MadelineProtoIntegration\Services\V1\Telegram\User\TelegramUserService;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\ServiceProvider;
 
 class MadelineProtoIntegrationServiceProvider extends ServiceProvider
 {
@@ -28,7 +29,11 @@ class MadelineProtoIntegrationServiceProvider extends ServiceProvider
     private function registerFacades(): void
     {
         $this->app->singleton('mpi-auth', function (Application $app) {
-            return $app->make(TelegramAuthUserService::class);
+            return $app->make(TelegramAuthService::class);
+        });
+
+        $this->app->singleton('mpi-user', function (Application $app) {
+            return $app->make(TelegramUserService::class);
         });
     }
 }

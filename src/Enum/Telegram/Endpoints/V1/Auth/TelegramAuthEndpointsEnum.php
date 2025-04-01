@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Buyme\MadelineProtoIntegration\Enum\Telegram\Endpoints\V1\Auth;
 
-enum TelegramAuthEnum: string
+enum TelegramAuthEndpointsEnum: string
 {
     case START_USER_LOGIN = 'v1/telegram/auth/user/start';
 

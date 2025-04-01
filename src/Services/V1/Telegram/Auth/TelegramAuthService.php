@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Buyme\MadelineProtoIntegration\Services\V1\Telegram\Auth\User;
+namespace Buyme\MadelineProtoIntegration\Services\V1\Telegram\Auth;
 
 use Buyme\MadelineProtoIntegration\Enum\Http\HttpRequestMethodsEnum;
-use Buyme\MadelineProtoIntegration\Enum\Telegram\Endpoints\V1\Auth\TelegramAuthEnum;
+use Buyme\MadelineProtoIntegration\Enum\Telegram\Endpoints\V1\Auth\TelegramAuthEndpointsEnum;
 use Buyme\MadelineProtoIntegration\Enum\Telegram\MessageCodesEnum;
 use Buyme\MadelineProtoIntegration\Services\V1\Http\MadelineHttpClientService;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Arr;
 use Throwable;
 
-readonly class TelegramAuthUserService
+readonly class TelegramAuthService
 {
     public function __construct(private MadelineHttpClientService $httpClientService)
     {
@@ -21,15 +21,15 @@ readonly class TelegramAuthUserService
     /**
      * @throws Throwable
      */
-    public function startBotLogin(): void
+    public function startBotLogin(): MessageCodesEnum
     {
         try {
             $this->httpClientService->performRequest(
                 HttpRequestMethodsEnum::METHOD_POST->value,
-                TelegramAuthEnum::START_BOT_LOGIN->value,
+                TelegramAuthEndpointsEnum::START_BOT_LOGIN->value,
             );
 
-            return;
+            return MessageCodesEnum::SUCCESS;
         } catch (Throwable $th) {
             report($th);
 
@@ -40,15 +40,15 @@ readonly class TelegramAuthUserService
     /**
      * @throws Throwable
      */
-    public function startUserLogin(): ?MessageCodesEnum
+    public function startUserLogin(): MessageCodesEnum
     {
         try {
             $this->httpClientService->performRequest(
                 HttpRequestMethodsEnum::METHOD_POST->value,
-                TelegramAuthEnum::START_USER_LOGIN->value,
+                TelegramAuthEndpointsEnum::START_USER_LOGIN->value,
             );
 
-            return null;
+            return MessageCodesEnum::SUCCESS;
         } catch (RequestException $exception) {
             $responseData = $exception->getResponse()->getBody()->getContents();
             $decodedContent = (array)json_decode(strval($responseData), true);
@@ -69,7 +69,7 @@ readonly class TelegramAuthUserService
     /**
      * @throws Throwable
      */
-    public function completeUserLogin(string $code): ?MessageCodesEnum
+    public function completeUserLogin(string $code): MessageCodesEnum
     {
         $requestParams = [
             'code' => $code,
@@ -78,11 +78,11 @@ readonly class TelegramAuthUserService
         try {
             $this->httpClientService->performRequest(
                 HttpRequestMethodsEnum::METHOD_POST->value,
-                TelegramAuthEnum::COMPLETE_USER_LOGIN->value,
+                TelegramAuthEndpointsEnum::COMPLETE_USER_LOGIN->value,
                 $requestParams,
             );
 
-            return null;
+            return MessageCodesEnum::SUCCESS;
         } catch (RequestException $exception) {
             $responseData = $exception->getResponse()->getBody()->getContents();
             $decodedContent = (array)json_decode(strval($responseData), true);
@@ -103,7 +103,7 @@ readonly class TelegramAuthUserService
     /**
      * @throws Throwable
      */
-    public function complete2FaUserLogin(string $code): void
+    public function complete2FaUserLogin(string $code): MessageCodesEnum
     {
         $requestParams = [
             'code' => $code,
@@ -112,9 +112,11 @@ readonly class TelegramAuthUserService
         try {
             $this->httpClientService->performRequest(
                 HttpRequestMethodsEnum::METHOD_POST->value,
-                TelegramAuthEnum::COMPLETE_2FA_USER_LOGIN->value,
+                TelegramAuthEndpointsEnum::COMPLETE_2FA_USER_LOGIN->value,
                 $requestParams,
             );
+
+            return MessageCodesEnum::SUCCESS;
         } catch (Throwable $th) {
             report($th);
 

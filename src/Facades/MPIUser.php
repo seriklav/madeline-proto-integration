@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace Buyme\MadelineProtoIntegration\Facades;
 
-use Buyme\MadelineProtoIntegration\Services\V1\Telegram\Auth\TelegramAuthService;
+use Buyme\MadelineProtoIntegration\Services\V1\Telegram\User\TelegramUserService;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @mixin TelegramAuthService
+ * @mixin TelegramUserService
  */
-class MPIAuth extends Facade
+class MPIUser extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return 'mpi-auth';
+        return 'mpi-user';
     }
 }
+
