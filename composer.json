@@ -48,7 +48,8 @@
             ],
             "aliases": {
                 "MPIAuth": "Buyme\\MadelineProtoIntegration\\Facades\\MPIAuth",
-                "MPIUser": "Buyme\\MadelineProtoIntegration\\Facades\\MPIUser"
+                "MPIUser": "Buyme\\MadelineProtoIntegration\\Facades\\MPIUser",
+                "MPIMessage": "Buyme\\MadelineProtoIntegration\\Facades\\MPIMessage"
             }
         }
     }
