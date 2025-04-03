@@ -18,6 +18,20 @@ readonly class TelegramAuthService
     {
     }
 
+    public function check(): bool
+    {
+        try {
+            $response = $this->httpClientService->performRequest(
+                HttpRequestMethodsEnum::METHOD_GET->value,
+                TelegramAuthEndpointsEnum::CHECK_AUTH->value,
+            );
+        } catch (Throwable) {
+            return false;
+        }
+
+        return boolval($response['data']['authenticated'] ?? false);
+    }
+
     /**
      * @throws Throwable
      */
