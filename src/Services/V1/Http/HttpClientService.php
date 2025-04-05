@@ -10,6 +10,7 @@ use Buyme\MadelineProtoIntegration\Enum\Telegram\MessageCodesEnum;
 use Buyme\MadelineProtoIntegration\Exceptions\Auth\MadelineNoAuthSessionException;
 use Buyme\MadelineProtoIntegration\Exceptions\Auth\MadelineNotLoggedInException;
 use Buyme\MadelineProtoIntegration\Services\V1\Auth\AuthTokenService;
+use Buyme\MadelineProtoIntegration\Traits\GuzzleHttp\GuzzleHttpResponseTrait;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Arr;
@@ -17,6 +18,8 @@ use Psr\Http\Message\ResponseInterface;
 
 readonly class HttpClientService implements HttpClientServiceInterface
 {
+    use GuzzleHttpResponseTrait;
+
     public function __construct(private AuthTokenService $authTokenService)
     {
     }
@@ -42,8 +45,7 @@ readonly class HttpClientService implements HttpClientServiceInterface
 
             return $this->getResponseContent($response);
         } catch (RequestException $exception) {
-            $responseData = $exception->getResponse()->getBody()->getContents();
-            $decodedContent = (array)json_decode(strval($responseData), true);
+            $decodedContent = $this->getRequestExceptionContent($exception);
             $messageCode = strval(Arr::get($decodedContent, 'message_code'));
 
             $customException = match ($messageCode) {

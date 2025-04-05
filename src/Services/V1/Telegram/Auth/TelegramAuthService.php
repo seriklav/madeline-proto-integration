@@ -8,12 +8,15 @@ use Buyme\MadelineProtoIntegration\Enum\Http\HttpRequestMethodsEnum;
 use Buyme\MadelineProtoIntegration\Enum\Telegram\Endpoints\V1\Auth\TelegramAuthEndpointsEnum;
 use Buyme\MadelineProtoIntegration\Enum\Telegram\MessageCodesEnum;
 use Buyme\MadelineProtoIntegration\Services\V1\Http\MadelineHttpClientService;
+use Buyme\MadelineProtoIntegration\Traits\GuzzleHttp\GuzzleHttpResponseTrait;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Arr;
 use Throwable;
 
 readonly class TelegramAuthService
 {
+    use GuzzleHttpResponseTrait;
+
     public function __construct(private MadelineHttpClientService $httpClientService)
     {
     }
@@ -64,8 +67,7 @@ readonly class TelegramAuthService
 
             return MessageCodesEnum::SUCCESS;
         } catch (RequestException $exception) {
-            $responseData = $exception->getResponse()->getBody()->getContents();
-            $decodedContent = (array)json_decode(strval($responseData), true);
+            $decodedContent = $this->getRequestExceptionContent($exception);
             $messageCode = strval(Arr::get($decodedContent, 'message_code'));
 
             if ($messageCode !== MessageCodesEnum::CONFIRMATION_CODE_REQUIRED->value) {
@@ -98,8 +100,7 @@ readonly class TelegramAuthService
 
             return MessageCodesEnum::SUCCESS;
         } catch (RequestException $exception) {
-            $responseData = $exception->getResponse()->getBody()->getContents();
-            $decodedContent = (array)json_decode(strval($responseData), true);
+            $decodedContent = $this->getRequestExceptionContent($exception);
             $messageCode = strval(Arr::get($decodedContent, 'message_code'));
 
             if ($messageCode !== MessageCodesEnum::CONFIRMATION_2FA_REQUIRED->value) {
