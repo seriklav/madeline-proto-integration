@@ -9,6 +9,7 @@ use Buyme\MadelineProtoIntegration\Enum\Http\HttpRequestMethodsEnum;
 use Buyme\MadelineProtoIntegration\Enum\Telegram\MessageCodesEnum;
 use Buyme\MadelineProtoIntegration\Exceptions\Auth\MadelineNoAuthSessionException;
 use Buyme\MadelineProtoIntegration\Exceptions\Auth\MadelineNotLoggedInException;
+use Buyme\MadelineProtoIntegration\Exceptions\MadelineRequestException;
 use Buyme\MadelineProtoIntegration\Services\V1\Auth\AuthTokenService;
 use Buyme\MadelineProtoIntegration\Traits\GuzzleHttp\GuzzleHttpResponseTrait;
 use GuzzleHttp\Client;
@@ -55,7 +56,11 @@ readonly class HttpClientService implements HttpClientServiceInterface
             };
 
             if (is_null($customException)) {
-                throw $exception;
+                throw new MadelineRequestException(
+                    strval(Arr::get($decodedContent, 'message')),
+                    $exception->getCode(),
+                    $exception,
+                );
             }
 
             throw new $customException;
