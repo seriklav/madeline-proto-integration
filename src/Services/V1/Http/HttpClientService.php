@@ -60,6 +60,7 @@ readonly class HttpClientService implements HttpClientServiceInterface
                     strval(Arr::get($decodedContent, 'message')),
                     $exception->getCode(),
                     $exception,
+                    $messageCode
                 );
             }
 

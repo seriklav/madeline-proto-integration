@@ -17,7 +17,6 @@ class MadelineProtoIntegrationServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../config/madeline-proto-integration.php' => config_path('madeline-proto-integration.php'),
         ], 'config');
-
     }
 
     public function register(): void

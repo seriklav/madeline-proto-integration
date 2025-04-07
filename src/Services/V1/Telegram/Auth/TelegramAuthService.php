@@ -76,6 +76,7 @@ readonly class TelegramAuthService
                     strval(Arr::get($decodedContent, 'message')),
                     $exception->getCode(),
                     $exception,
+                    $messageCode
                 );
             }
 
@@ -113,6 +114,7 @@ readonly class TelegramAuthService
                     strval(Arr::get($decodedContent, 'message')),
                     $exception->getCode(),
                     $exception,
+                    $messageCode
                 );
             }
 
