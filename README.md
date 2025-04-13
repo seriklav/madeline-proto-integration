@@ -3,7 +3,7 @@
 This package helps integrate MadelineProto in existing BuymeUa project
 
 ## Installation
-
+[]()
 - You can install this package via composer using this command:
 
 ```bash
